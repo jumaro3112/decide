@@ -42,6 +42,8 @@
                 </table>
             </div>
 
+            <p id="qr-result">Puedes compartir los resultados de está votación mediante el siguiente código QR:</p>
+            <canvas id="qr-code"></canvas>
         </div>
     </div>
 {% endblock %}
@@ -51,6 +53,7 @@
     <script src="https://unpkg.com/vue"></script>
     <script src="https://unpkg.com/babel-polyfill@latest/dist/polyfill.min.js"></script>
     <script src="https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
 
     <script>
         var voting = {{voting|safe}};
@@ -62,5 +65,17 @@
             }
         })
     </script>
+
+    <script>
+        var qr;
+        (function() {
+                qr = new QRious({
+                element: document.getElementById('qr-code'),
+                size: 100,
+                value: window.location.href
+            });
+        })();
+    </script>
+
 </body>
 {% endblock %}
