@@ -7,14 +7,57 @@
     <link type="text/css" rel="stylesheet"
          href="https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.css" />
     <link type="text/css" rel="stylesheet" href="{% static "booth/style.css" %}" />
+      <!--Load the AJAX API-->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+
+      // Load the Visualization API and the corechart package.
+      google.charts.load('current', {'packages':['corechart']});
+
+      // Set a callback to run when the Google Visualization API is loaded.
+      google.charts.setOnLoadCallback(drawChart);
+
+      // Callback that creates and populates a data table,
+      // instantiates the pie chart, passes in the data and
+      // draws it.
+      function drawChart() {
+
+        // Create the data table.
+         var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Topping');
+        data.addColumn('number', 'Slices');
+   
+
+ myObj2 = JSON.parse(JSON.stringify(voting.postproc));
+ for (var opt in myObj2) {
+  data.addRows([[myObj2[opt].option,myObj2[opt].postproc]]);
+} 
+
+ 
+        // Set chart options
+     
+        var options = {'title':voting.name,
+                       'width':500,
+                       'height':600};
+
+        // Instantiate and draw our chart, passing in some options.
+        var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
+      }
+    </script>
 {% endblock %}
 
 {% block content %}
+<a href="javascript:var dir=window.document.URL;var tit=window.document.title;var tit2=encodeURIComponent(tit);var dir2= encodeURIComponent(dir);window.location.href=('http://www.facebook.com/share.php?u='+dir2);"><img src="https://i2.wp.com/www.alexborras.com/wp-content/uploads/2011/04/facebook-logo.png?resize=256%2C256" border="0" width="32" height="26" alt="Compartir" /></a>
+<a href="javascript:var dir=window.document.URL;var tit=window.document.title;var tit2=encodeURIComponent(tit);window.location.href=('http://twitter.com/?status='+'%20'+dir+'');"><img src="https://norfipc.com/img/icon/share-twitter.png" border="0" width="55" height="26" alt="Compartir" /></a>
+
     <div id="app-visualizer">
+   
         <!-- Navbar -->
         <b-navbar type="dark" variant="secondary">
             <b-navbar-brand tag="h1">Decide</b-navbar-brand>
         </b-navbar>
+    
 
         <div class="voting container">
             <h1>[[ voting.id ]] - [[ voting.name ]]</h1>
@@ -40,8 +83,12 @@
                         </tr>
                     </tbody>
                 </table>
+               
+                 <div id="chart_div"></div>
             </div>
 
+            <p id="qr-result">Puedes compartir los resultados de está votación mediante el siguiente código QR:</p>
+            <canvas id="qr-code"></canvas>
         </div>
     </div>
 {% endblock %}
@@ -51,9 +98,11 @@
     <script src="https://unpkg.com/vue"></script>
     <script src="https://unpkg.com/babel-polyfill@latest/dist/polyfill.min.js"></script>
     <script src="https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
 
     <script>
         var voting = {{voting|safe}};
+      
         var app = new Vue({
             delimiters: ['[[', ']]'],
             el: '#app-visualizer',
@@ -61,6 +110,20 @@
                 voting: voting
             }
         })
+      
+        
     </script>
+
+    <script>
+        var qr;
+        (function() {
+                qr = new QRious({
+                element: document.getElementById('qr-code'),
+                size: 100,
+                value: window.location.href
+            });
+        })();
+    </script>
+
 </body>
 {% endblock %}
