@@ -36,7 +36,7 @@
  
         // Set chart options
      
-        var options = {'title':voting.name,
+        var options = {'title':voting.question.desc,
                        'width':500,
                        'height':600};
 
@@ -60,7 +60,7 @@
     
 
         <div class="voting container">
-            <h1>[[ voting.id ]] - [[ voting.name ]]</h1>
+            <h1>[[ voting.id ]] - [[ voting.name ]]-[[voting.question.desc]]</h1>
 
             <h2 v-if="!voting.start_date">Votación no comenzada</h2>
             <h2 v-else-if="!voting.end_date">Votación en curso</h2>
@@ -83,12 +83,18 @@
                         </tr>
                     </tbody>
                 </table>
-               
-                 <div id="chart_div"></div>
+                
+                 
             </div>
-
-            <p id="qr-result">Puedes compartir los resultados de está votación mediante el siguiente código QR:</p>
-            <canvas id="qr-code"></canvas>
+            <div class="row">
+            <div class="column">
+            <div v-if="voting.end_date" id="chart_div"></div>
+            </div>
+            <div class="column">
+            <p v-if="voting.end_date" id="qr-result">Puedes compartir los resultados de está votación mediante el siguiente código QR:</p>
+            <canvas v-if="voting.end_date" id="qr-code"></canvas>
+            </div>
+            </div>
         </div>
     </div>
 {% endblock %}
@@ -125,5 +131,5 @@
         })();
     </script>
 
-</body>
+
 {% endblock %}
