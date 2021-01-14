@@ -4,11 +4,15 @@ from django.utils import timezone
 from django.shortcuts import get_object_or_404
 from rest_framework import generics, status
 from rest_framework.response import Response
+import smtplib
 
-from .models import Question, QuestionOption, Voting
+from .models import Question, QuestionOption, Voting, Census
 from .serializers import SimpleVotingSerializer, VotingSerializer
 from base.perms import UserIsStaff
 from base.models import Auth
+
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
 
 
 class VotingView(generics.ListCreateAPIView):
@@ -55,6 +59,7 @@ class VotingUpdate(generics.RetrieveUpdateDestroyAPIView):
     filter_backends = (django_filters.rest_framework.DjangoFilterBackend,)
     permission_classes = (UserIsStaff,)
 
+    
     def put(self, request, voting_id, *args, **kwars):
         action = request.data.get('action')
         if not action:
@@ -94,8 +99,42 @@ class VotingUpdate(generics.RetrieveUpdateDestroyAPIView):
                 st = status.HTTP_400_BAD_REQUEST
             else:
                 voting.tally_votes(request.auth.key)
+                ## voting.send_email(self,voting_id)
                 msg = 'Voting tallied'
         else:
             msg = 'Action not found, try with start, stop or tally'
             st = status.HTTP_400_BAD_REQUEST
         return Response(msg, status=st)
+
+    """def send_email(self, voting_id):
+        voters = Census.objects.filter(voting_id=voting_id).values_list('voter_id', flat=True)
+        
+        # definimos los correo de remitente y receptor
+        ##se envia un mail a
+        email_a   = 'josgonman@alum.us.es'
+        ##el mail sale desde el correo
+        email_de = 'semahsp16@gmail.com'
+
+        # Se define el servidor, usuario, y contraseña de quien envia
+        smtp_server = 'smtp.gmail.com'
+        smtp_user   = 'semahsp16@gmail.com'
+        smtp_pass   = 'JM1995GM5991'
+        
+        # Construimos el mail
+        msg = MIMEMultipart() 
+        msg['To'] = email_a
+        msg['From'] = email_de
+        msg['Subject'] = 'Prueba'
+        #cuerpo del mensaje en HTML
+        msg.attach(MIMEText('< h1>Ya están los resultados de la votación< p>Aquí puede ver el resultado:\n http://localhost:8000/visualizer/'+ voting_id +'/','html'))
+
+        # inicializamos el stmp para hacer el envio
+        server = smtplib.SMTP(smtp_server, 587)
+        server.starttls()
+        #logeamos con los datos ya seteamos en la parte superior
+        server.login(smtp_user,smtp_pass)
+        #el envio
+        server.sendmail(email_de, email_a, msg.as_string())
+        #apagamos conexion stmp
+        server.quit()"""
+    
