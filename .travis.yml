@@ -22,12 +22,6 @@ script:
   - coverage python ./manage.py test --keepdb
   - coverage xml
   - python-codacy-coverage -r coverage.xml
-notifications:
-  email:
-    recipients:
-      -moimarram@alum.us.es
-      on_success: always
-      on_failure: always
 deploy:
   provider: heroku
   app: egc-guadalquivir-vis
