@@ -28,7 +28,7 @@ notifications:
       -moimarram@alum.us.es
       on_success: always
       on_failure: always
- deploy:
+deploy:
   provider: heroku
   app: egc-guadalquivir-vis
   strategy: git
