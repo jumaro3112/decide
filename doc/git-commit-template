@@ -1,0 +1,28 @@
+# <TIPO> -  <Título del commit> (Máximo 1 frase)
+# Ejemplo:
+# TEST - Test de Selenium para la Funcionalidad 4
+
+# (Opcional) Explicar motivo del cambio
+# |Usar frases descriptivas, breves y concisas|
+
+# (Opcional) Si fuera posible, etiquetar la Issue del Proyecto en la cual se esté trabajando.
+# Example: Issue #11
+
+# - FINAL DEL COMMIT -
+
+# Los posibles TIPO son:
+#    FUNCIONALIDAD     (nueva funcionalidad)
+#    TEST              (test)
+#    BUG FIX           (corrección de error/es)
+#    REFACTORING       (refactorización de código)
+#    DOC               (cambios de documentación)
+#
+# *** Se recomienda combinar etiquetas de TIPO En caso de haber llevado a cabo en un commit diferentes tipos, e.g. BUG FIX / TEST - Arreglado error en Funcionalidad X y añadido su correspondiente test #17
+# --------------------
+# Recordad:
+*   * Usar mayúsculas para escribir el tipo del commit.
+*   * No usar más de una frase en el título del commit. En caso de tener que dejar constancia de diferentes puntos, definirlo en el cuerpo del commit.
+#   * Usar el cuerpo del commit para resumir brevemente QUÉ y CÓMO se ha implementado, además de algún punto en concreto que sea necesario destacar.
+#   * Escribir siguiendo las reglas ortográficas, no solo el contenido es importante, también la forma.
+#
+# --------------------
