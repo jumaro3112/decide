@@ -16,8 +16,8 @@ before_script:
 - sudo mv geckodriver /usr/local/bin
 - export DISPLAY=:99.0
 - Xvfb :99 -screen 0 1024x768x24 > /dev/null 2>&1 &
-  
-- wget -N http://chromedriver.storage.googleapis.com/87.0.4280.87/chromedriver_linux64.zip -P ~/
+- wget -N http://chromedriver.storage.googleapis.com/87.0.4280.87/chromedriver_linux64.zip
+  -P ~/
 - unzip ~/chromedriver_linux64.zip -d ~/
 - rm ~/chromedriver_linux64.zip
 - sudo mv -f ~/chromedriver /usr/local/share/
@@ -47,7 +47,7 @@ notifications:
     on_failure: always
 deploy:
   provider: heroku
-  app: egc-guadalquivir-vis
+  app: prueba-xamen
   strategy: git
   api_key:
-    secure: lwACeWnAlexzrSMQpw0PRxh+n+JS3vyB1RT5kF7nuEdYfmBCyNqACiqFkSu741RHFei3xmSs4pDgx8qxdnj7ortk94Nh3b1PNquAy5h/Y7c/2GjhJVQtFWcDmAEFYCNOkt6J6OPCmjyS7akLON1XWt9jBE9Dmpwbg9idVwXfcPkFEqQsEZ6Bd1q27d2A6pAd6i+8zCXxixf2ORs6+J3Z5PG7TWNgM6ZlAYiDjRLVfHNcy3/uVzjfM0tdLp6na9cjN4NFd+8Ag/40w02okDHlapdWdTXk3gncqNg2Bcc9O4T4upe1wps++34V7OWy7wYldbN+OhIdlXccY078m7FNQMwG5at/Qw/UV2J7yhJ18TfBL2hh6AEMkEAm6sSn/EwbwKGSiFLBQ96hrkX8N6fARA45bUI8MrE3bCiIDxKRVcSvPBlW9Z1DWcaYnOFWUcZEac4tnVJgp4MikSEwGlD1A59xx9ADwM9w3Ww9plDm8vUgiQN6OGjys+olV1JN+Dd1dCj36vGuL/h7413v2barfbvetS5zH7ZE2O0cxML99hGwt96jo+IhwPoBODGmPAIdMFhNzmHczqGiwGk9vU20N8K+INNRRcyP2B/OPUBgVa43HHQR8xm0ljAL0Lst14rWRXm0uCSwAGg24JTjNVVW6k5s9dUd6jYTxm0s2mBhQuw=
+    secure: 1L7NR7Y0lhz8Vsta7Otl+tzBJKQvWBHPEp+3iSs5w/M6ciu+TohjqKsJtkK1NJFjDnV0jLiAbvRsQCNnkE0UVlFrcPcEu2HBx0crpaGM1nS3KZ82d1fbKXyPIatnG/6hKowpqD4GVi0IXxkPZCKNgZVk7UeP452nPbt17zh1Q7F7E6Uwj/td2cwicYhpX8Ve2VYI+pcrEEkZbLp0n7WEmgAffMSZxfPuzyXuQsaFgdw3LR47MbUXSr1+T52McdnHGBBcixyDh1SMbeZXTKDsYz+quj6xbtEYcrxGXfGE0doQczv6wRj2tZnDVBvrP5yfo0GmLgIFoLoA6MBMseoRDgStq60lr326PN/RwuXGQ2MeJNv4KjJnnQiZxPlFCW9aGVCYk2OI6HHvHq16oq7KVCu4/DbLnDTsguAtbllfh6Stqd5GHEYOrQI9jaZuk4vLvH3kz/sTrQ0Oi5EPzrpI4BDvgciUkpXhmLU2j1/HJ0eIsQJvZbHXg9BkNIxszeC6qCt23avGck0KEPIYF+ATYpelPC8wSCccmRwkMhnUBIaT9UbfToM7MEYiVYDY20T5U8ykVWTOY2mZYVXrCy/djEd8KqqfW3XQcy6el4MbpHU2ycIdCpjAqXw+QQhaBd1KRUAtuPmbXJeYCL/xtOy0fRfpTa5lkUkSawBH0znxxyo=
