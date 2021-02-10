@@ -167,7 +167,7 @@ APIS = {}
 ALLOWED_VERSIONS = ['v1', 'v2']
 DEFAULT_VERSION = 'v1'
 
-BASEURL = "https://egc-guadalquivir-vis.herokuapp.com"
+BASEURL = "https://prueba-xamen.herokuapp.com"
 
 try:
     from local_settings import *
